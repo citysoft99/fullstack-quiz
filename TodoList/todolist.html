@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Todo List App</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+		<script src="todolistcontroller.js"></script>
+		<link rel="stylesheet" type="text/css" href="todolist.css">
+	</head>
+	<body>
+		<div ng-app="TodoListApp">
+			<div ng-controller="TodoListController" class="container">
+				<div class="row">
+					<div class="col-md-6 todolist not-done">
+						<h1>You have {{todos.length}} task(s) in your list</h1>
+						<input class="form-control add-todo" placeholder="Need to do ..." type="text" ng-model="todoText" ng-enter="addToDo()" ng-model-instant />
+						<button class="btn btn-success" ng-click="addToDo()" ng-disabled="todoText.trim() == ''">Add</button>
+						<button class="btn" ng-click="clearText()" ng-disabled="todoText.trim() == ''">Clear Text</button>
+						<hr>
+						<ul id="sortable" class="list-unstyled ui-sortable">
+							<li ng-repeat="todo in todos" class="ui-state-default">
+								<div class="checkbox">
+									<label><input type="checkbox" ng-model="todo.selected" value="">{{todo.text}}</label>
+								</div>
+							</li>
+						</ul>
+						<button class="btn" ng-click="selectAll()" ng-disabled="!hasItem()">Select All</button>
+						<button class="btn btn-danger" ng-click="deleteItems()" ng-disabled="!hasSelected()">Delete selected item(s)</button>
+						<hr>
+						<p class="copyright">Designed by citysoft99@gmail.com</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
